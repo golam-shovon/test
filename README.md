@@ -17,7 +17,6 @@ Ensure that the following Helm Chart Repos are set up or add them locally:
 
 ```bash
 helm repo add sogno https://sogno-platform.github.io/helm-charts
-
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo add influxdata https://influxdata.github.io/helm-charts
 helm repo add grafana https://grafana.github.io/helm-charts
@@ -87,6 +86,24 @@ helm install influxdb influxdata/influxdb -f database/influxdb-helm-values.yaml
 helm install telegraf influxdata/telegraf -f ts-adapter/telegraf-values.yaml
 ```
 
+### KeyCloak:    
+
+The following installation will deploy a KeyCloak instance that is available at the nodePort specified in the keycloak_values.yaml file.
+Per defautl at port 31250: http://localhost:31250
+
+```bash
+helm install my-release -f keycloak/keycloak_values.yaml bitnami/keycloak
+```
+To Get the user password for the keycloak, run this command.
+```bash
+ echo Password: $(kubectl get secret --namespace default my-release-keycloak -o jsonpath="{.data.admin-password}" | base64 --decode)
+```
+Login to the keycloak instance. The user name is:user and use the passwrod.
+
+Than Create a realm for common authentication for your applications.
+![alt text](https://i2.wp.com/www.techrunnr.com/wp-content/uploads/2020/07/Screenshot-from-2020-07-12-22-19-43.png?w=775&ssl=1)
+
+
 ### Visualization
 
 The following installation will deploy a Grafana instance that is available at the nodePort specified in the grafana_values.yaml file.
@@ -109,7 +126,7 @@ helm install pintura sogno/pintura -f cim-editor/pintura_values.yaml
 ### DPsim Simulation
 
 ```bash
-helm install dpsim-demo sogno/dpsim-demo
+helm install dpsim   -demo sogno/dpsim-demo
 ```
 
 ### State-Estimation

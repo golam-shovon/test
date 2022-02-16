@@ -83,6 +83,8 @@ kubectl apply -f visualization/dashboard-configmap.yaml
 ```
 The configmap contains a demo dashboard and should automatically be recognized by the grafana instance. Username and password for Grafana are set to "demo".
 
+You have to create a user in the realm you created to use the login with the keylocak feature.
+
 ### CIM Editor Pintura
 
 The following installation will deploy a Pintura instance that is available at the nodePort specified in the pintura_values.yaml file.

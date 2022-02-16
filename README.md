@@ -103,7 +103,15 @@ Login to the keycloak instance. The user name is:user and use the passwrod.
 Than Create a realm for common authentication for your applications.
 ![alt text](https://i2.wp.com/www.techrunnr.com/wp-content/uploads/2020/07/Screenshot-from-2020-07-12-22-19-43.png?w=775&ssl=1)
 
+Create a client for grafana as given below where root url is your grafana application URL.In this case it will be "http://localhost:31230."
+![alt text](https://i0.wp.com/www.techrunnr.com/wp-content/uploads/2020/07/Screenshot-from-2020-07-12-23-18-38.png?w=850&ssl=1)
 
+Once the client is created, open the client configuration and change the access type to confidential from public. Save the config.
+![alt text](https://i0.wp.com/www.techrunnr.com/wp-content/uploads/2020/07/Screenshot-from-2020-07-12-23-23-08.png?w=702&ssl=1)
+
+Open the client grafana again and go to credentials tag and copy the client id and secret for future use.
+
+![alt text](https://i0.wp.com/www.techrunnr.com/wp-content/uploads/2020/07/Screenshot-from-2020-07-12-23-23-32.png?w=710&ssl=1 )
 ### Visualization
 
 The following installation will deploy a Grafana instance that is available at the nodePort specified in the grafana_values.yaml file.

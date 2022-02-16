@@ -22,49 +22,6 @@ helm repo add influxdata https://influxdata.github.io/helm-charts
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
 ```
-### HugePages
-
-The current setup requires HugePages support for the real-time simulator. This can be checked and activated (temporarily) as follows:
-
-```bash
-# Verify HugePages
-cat /proc/meminfo | grep Huge
-
-AnonHugePages:    104448 kB
-ShmemHugePages:        0 kB
-FileHugePages:         0 kB
-HugePages_Total:       0		<-- we require a minimum of 1024
-HugePages_Free:        0
-HugePages_Rsvd:        0
-HugePages_Surp:        0
-Hugepagesize:       2048 kB
-Hugetlb:               0 kB
-
-# Increase No of HPgs
-echo 1024 | sudo tee /proc/sys/vm/nr_hugepages
-
-# Check it worked
-cat /proc/meminfo | grep Huge
-
-AnonHugePages:    104448 kB
-ShmemHugePages:        0 kB
-FileHugePages:         0 kB
-HugePages_Total:    1024
-HugePages_Free:     1024
-HugePages_Rsvd:        0
-HugePages_Surp:        0
-Hugepagesize:       2048 kB
-Hugetlb:         2097152 kB
-
-If you don't see 1024 next to HugePages_Total, you may need to restart
-your system and try again with a fresh boot.
-
-# Restart k3s service to apply changes
-sudo systemctl restart k3s
-
-# Ensure the KUBECONFIG env is still set correctly
-export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-```
 
 ## Manual Chart Installation
 
@@ -112,9 +69,12 @@ Once the client is created, open the client configuration and change the access 
 Open the client grafana again and go to credentials tag and copy the client id and secret for future use.
 
 ![alt text](https://i0.wp.com/www.techrunnr.com/wp-content/uploads/2020/07/Screenshot-from-2020-07-12-23-23-32.png?w=710&ssl=1 )
+
+
 ### Visualization
 
-The following installation will deploy a Grafana instance that is available at the nodePort specified in the grafana_values.yaml file.
+The following installation will deploy a Grafana instance that is available at the nodePort specified in the grafana_values.yaml file. 
+Change the client_secret with your own.
 Per defautl at port 31230: http://localhost:31230
 
 ```bash

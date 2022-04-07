@@ -88,45 +88,24 @@ helm install telegraf influxdata/telegraf -f ts-adapter/telegraf-values.yaml
 
 ### KeyCloak:    
 
-The following installation will deploy a KeyCloak instance that is available at the nodePort specified in the keycloak_values.yaml file.
+The following installation will deploy a KeyCloak instance that is available at the nodePort specified in the keycloak_values.yaml file.The username and password both is user for the admin panel.
 Per defautl at port 31250: http://localhost:31250
 
 ```bash
 helm install my-release -f keycloak/keycloak_values.yaml bitnami/keycloak
 ```
-To Get the user password for the keycloak, run this command.
-```bash
- echo Password: $(kubectl get secret --namespace default my-release-keycloak -o jsonpath="{.data.admin-password}" | base64 --decode)
-```
-Login to the keycloak instance. The user name is:user and use the passwrod.
-
-Than Create a realm for common authentication for your applications.
-![alt text](https://i2.wp.com/www.techrunnr.com/wp-content/uploads/2020/07/Screenshot-from-2020-07-12-22-19-43.png?w=775&ssl=1)
-
-Create a client for grafana as given below where root url is your grafana application URL.In this case it will be "http://localhost:31230."
-![alt text](https://i0.wp.com/www.techrunnr.com/wp-content/uploads/2020/07/Screenshot-from-2020-07-12-23-18-38.png?w=850&ssl=1)
-
-Once the client is created, open the client configuration and change the access type to confidential from public. Save the config.
-![alt text](https://i0.wp.com/www.techrunnr.com/wp-content/uploads/2020/07/Screenshot-from-2020-07-12-23-23-08.png?w=702&ssl=1)
-
-Open the client grafana again and go to credentials tag and copy the client id and secret for future use.
-
-![alt text](https://i0.wp.com/www.techrunnr.com/wp-content/uploads/2020/07/Screenshot-from-2020-07-12-23-23-32.png?w=710&ssl=1 )
-
+To create keycloak realm, client and user run the python script keycloak_createion.py.
 
 ### Visualization
 
 The following installation will deploy a Grafana instance that is available at the nodePort specified in the grafana_values.yaml file. 
-Change the client_secret with your own.
 Per defautl at port 31230: http://localhost:31230
 
 ```bash
 helm install grafana grafana/grafana -f visualization/grafana_values.yaml
 kubectl apply -f visualization/dashboard-configmap.yaml
 ```
-The configmap contains a demo dashboard and should automatically be recognized by the grafana instance. Username and password for Grafana are set to "demo".
-
-You have to create a user in the realm you created to use the login with the keylocak feature.
+The configmap contains a demo dashboard and should automatically be recognized by the grafana instance. Username and password for Grafana are set to "demo".Its also the same in the case of login with oauth.
 
 ### CIM Editor Pintura
 

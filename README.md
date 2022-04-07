@@ -24,7 +24,7 @@ helm repo update
 ```
 ### HugePages
 
-The current setup requires HugePages support for the real-time simulator. This can be checked and activated (temporarily) as follows:
+The current setup requires HugePages support for the real-time simulator. But if you want keycloak sso service , do not do this.This can be checked and activated (temporarily) as follows:
 
 ```bash
 # Verify HugePages

@@ -88,7 +88,7 @@ helm install telegraf influxdata/telegraf -f ts-adapter/telegraf-values.yaml
 
 ### KeyCloak:    
 
-The following installation will deploy a KeyCloak instance that is available at the nodePort specified in the keycloak_values.yaml file.The username and password both is user for the admin panel.
+The following installation will deploy a KeyCloak instance that is available at the nodePort specified in the keycloak_values.yaml file.The username and password both is "user" for the admin panel.
 Per defautl at port 31250: http://localhost:31250
 
 ```bash
